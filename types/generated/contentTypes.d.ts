@@ -362,75 +362,6 @@ export interface AdminTransferTokenPermission extends Schema.CollectionType {
   };
 }
 
-export interface ApiStudentClassStudentClass extends Schema.CollectionType {
-  collectionName: 'student_classes';
-  info: {
-    singularName: 'student-class';
-    pluralName: 'student-classes';
-    displayName: 'student_class ';
-  };
-  options: {
-    draftAndPublish: false;
-  };
-  attributes: {
-    class_id: Attribute.Integer;
-    faculty_number: Attribute.Text;
-    faculty_name: Attribute.Text;
-    subject_code: Attribute.Text;
-    subject_description: Attribute.Text;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::student-class.student-class',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::student-class.student-class',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
-export interface ApiStudentInfoStudentInfo extends Schema.CollectionType {
-  collectionName: 'student_infos';
-  info: {
-    singularName: 'student-info';
-    pluralName: 'student-infos';
-    displayName: 'student_info ';
-  };
-  options: {
-    draftAndPublish: false;
-  };
-  attributes: {
-    student_no: Attribute.Text;
-    last_name: Attribute.Text;
-    first_name: Attribute.Text;
-    middle_name: Attribute.Text;
-    course: Attribute.String;
-    sec: Attribute.String;
-    contact_number: Attribute.Integer;
-    address: Attribute.String;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::student-info.student-info',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::student-info.student-info',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
 export interface PluginUploadFile extends Schema.CollectionType {
   collectionName: 'files';
   info: {
@@ -857,6 +788,111 @@ export interface PluginI18NLocale extends Schema.CollectionType {
   };
 }
 
+export interface ApiStudenGradeStudenGrade extends Schema.CollectionType {
+  collectionName: 'studen_grades';
+  info: {
+    singularName: 'studen-grade';
+    pluralName: 'studen-grades';
+    displayName: 'studen_grade';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    class_id: Attribute.String;
+    student_no: Attribute.Text;
+    prelim_grade: Attribute.Float;
+    midterm_grade: Attribute.Float;
+    final_grade: Attribute.Float;
+    total_grade: Attribute.Float;
+    remarks: Attribute.Float;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::studen-grade.studen-grade',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::studen-grade.studen-grade',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiStudentClassStudentClass extends Schema.CollectionType {
+  collectionName: 'student_classes';
+  info: {
+    singularName: 'student-class';
+    pluralName: 'student-classes';
+    displayName: 'student_class ';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    class_id: Attribute.Integer;
+    faculty_number: Attribute.Text;
+    faculty_name: Attribute.Text;
+    subject_code: Attribute.Text;
+    subject_description: Attribute.Text;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::student-class.student-class',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::student-class.student-class',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiStudentInfoStudentInfo extends Schema.CollectionType {
+  collectionName: 'student_infos';
+  info: {
+    singularName: 'student-info';
+    pluralName: 'student-infos';
+    displayName: 'student_info ';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    student_no: Attribute.Text;
+    last_name: Attribute.Text;
+    first_name: Attribute.Text;
+    middle_name: Attribute.Text;
+    course: Attribute.String;
+    sec: Attribute.String;
+    contact_number: Attribute.Integer;
+    address: Attribute.String;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::student-info.student-info',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::student-info.student-info',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 declare module '@strapi/types' {
   export module Shared {
     export interface ContentTypes {
@@ -867,8 +903,6 @@ declare module '@strapi/types' {
       'admin::api-token-permission': AdminApiTokenPermission;
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
-      'api::student-class.student-class': ApiStudentClassStudentClass;
-      'api::student-info.student-info': ApiStudentInfoStudentInfo;
       'plugin::upload.file': PluginUploadFile;
       'plugin::upload.folder': PluginUploadFolder;
       'plugin::content-releases.release': PluginContentReleasesRelease;
@@ -877,6 +911,9 @@ declare module '@strapi/types' {
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
       'plugin::i18n.locale': PluginI18NLocale;
+      'api::studen-grade.studen-grade': ApiStudenGradeStudenGrade;
+      'api::student-class.student-class': ApiStudentClassStudentClass;
+      'api::student-info.student-info': ApiStudentInfoStudentInfo;
     }
   }
 }
